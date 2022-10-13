@@ -1,0 +1,62 @@
+<div class="video-row">
+    <mat-card class="example-card" *ngFor="let movie of allMovies$ | async">
+
+        <img mat-card-image *ngIf="movie.poster" src="{{movie.poster}}" (error)="handleMissingImage($event)"
+            alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <h1>{{ movie.title }}</h1>
+            <p>{{ movie.plot }}</p>
+            <div class="genre">
+                <span *ngFor="let gnr of movie.genres">{{ gnr }} </span>
+            </div>
+        </mat-card-content>
+
+        <p *ngFor="let langs of movie.languages">
+            <span class="red">{{ langs }}</span>
+        </p>
+
+        <p *ngFor="let langs of movie.languages">
+            <span class="rating">{{ movie?.imdb?.rating }} / 10</span>
+        </p>
+        <mat-accordion>
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        More Info
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <strong>Director(s):</strong>
+                <p>
+                    <span *ngFor="let directors of movie.directors">{{ directors }}<br></span>
+                </p>
+                <strong>Cast:</strong>
+                <p>
+                    <span *ngFor="let cast of movie.cast">{{ cast }}<br></span>
+                </p>
+                <strong>Awards</strong>
+                <p>
+                    {{ movie.released | date: 'MM/dd/yyyy' }}
+                </p>
+                <strong>Awards:</strong>
+                <p>
+                    <span *ngFor="let award of movie.awards">
+                        <span>Wins: {{ award?.text }}</span><br>
+                        <span>Nominations: {{ award?.nominations }}</span><br>
+                    </span>
+                </p>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <br>
+        <mat-accordion *ngIf="movie.fullplot">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Full Plot
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <p>{{ movie.fullplot }}</p>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </mat-card>
+
+</div>

@@ -11,6 +11,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { HeaderComponent } from './header/header.component';
+import { BodyComponent } from './body/body.component';
 
 
 
@@ -18,6 +20,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
   declarations: [
     AppComponent,
     MainComponent,
+    HeaderComponent,
+    BodyComponent,
   ],
   imports: [
     BrowserModule,

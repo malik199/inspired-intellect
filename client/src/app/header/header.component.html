@@ -1,0 +1,12 @@
+<mat-toolbar>
+    <mat-icon [matMenuTriggerFor]="menu">menu</mat-icon>
+
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngFor="let genre of genres$ | async" (click)="setGenre(genre)">
+            <span>{{genre}}</span>
+        </button>
+    </mat-menu>
+    <h1 class="title red">MFlix</h1>
+    <span class="example-spacer"></span>
+    <mat-icon>notifications</mat-icon>
+</mat-toolbar>
