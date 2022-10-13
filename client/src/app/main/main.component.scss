@@ -1,0 +1,92 @@
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+.example-menu {
+    display: inline-flex;
+    flex-direction: column;
+    min-width: 180px;
+    max-width: 280px;
+    background-color: rgb(255, 255, 255);
+    padding: 6px 0;
+}
+
+.example-menu-item {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+
+    user-select: none;
+    min-width: 64px;
+    line-height: 36px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex: 1;
+}
+
+.example-menu-item:hover {
+    background-color: rgb(208, 208, 208);
+}
+
+.example-menu-item:active {
+    background-color: rgb(170, 170, 170);
+}
+
+button {
+    border: none !important;
+}
+
+.example-card {
+    max-width: 300px;
+    min-width: 300px;
+    margin: 20px 0 20px 20px;
+}
+
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+
+.video-row {
+    display: flex;
+    flex-direction: row;
+    overflow: scroll;
+}
+
+.genre span {
+    font-weight: bold;
+    color: white;
+    padding:0 10px;
+}
+.genre span:not(:last-child) {
+    border-right: 2px solid white;
+    padding: 0 5px;
+}
+
+.genre span:first-child {
+    padding:0 5px 0 0;
+}
+
+.title {
+    font-size: 1.5em;
+    margin-left: 10px;
+}
+
+.red {
+    color: red;
+}
+
+.rating {
+    padding:5px 10px;
+    margin-right: 5px;
+    background-color: #2125d6;
+    border-radius: 5px;
+    font-weight:bold;
+}
+
+.mat-card {
+    background-color: black;
+}
