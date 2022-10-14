@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { IflixMovies } from 'src/app/interfaces/iflix-movies';
+import { RangeValueAccessor } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -68,21 +69,23 @@ export class MovieService {
     type: "movie",
     lasupdated: "2020-03-19T23:35:17.315Z"
   }]
-  private _movieBehaviorSubject: BehaviorSubject<IflixMovies[]> = new BehaviorSubject<IflixMovies[]>(this.oneMovie as unknown as IflixMovies[]);
+  private _movieBehaviorSubject: BehaviorSubject<IflixMovies[]> = new BehaviorSubject<IflixMovies[]>([]);
   private _movieObserverable = this._movieBehaviorSubject.asObservable();
+  _filteredMovies$: Observable<IflixMovies[]>;
 
   private url = 'http://localhost:3000/api/movies';
-  //$myMovies: Observable<IflixMovies[]>;
-  public $filteredMovies: Observable<IflixMovies[]>;
-
+  
   constructor(private http: HttpClient) { }
 
-  fetchMovies(): Observable<IflixMovies[]> {
+  fetchMovies() {
     this._movieObserverable = this.http.get<IflixMovies[]>(this.url);
     return this._movieObserverable
   }
 
   getFilteredMovies(): Observable<IflixMovies[]> {
+    this._movieObserverable.subscribe(movies => {
+      this._movieBehaviorSubject.next(movies);
+    })
     return this._movieBehaviorSubject;
   }
 
@@ -92,18 +95,10 @@ export class MovieService {
         return mov.genres.includes(genre);
       })),
     )
-    return this._movieBehaviorSubject.next(_movies$ as any)
+    _movies$.subscribe(movies => {
+      this._movieBehaviorSubject.next(movies);
+    })
+    return this._movieBehaviorSubject;
   }
-
-  // filterMovies(genre: string){
-  //   const _movies$: Observable<IflixMovies[]> = this._movieObserverable.pipe(
-  //     map(items => items.filter(mov => {
-  //       return mov.genres.includes(genre);
-  //     })),
-  //   )
-  
-  //   return this._movieBehaviorSubject.next(_movies$ as any) 
-
-  // }
 
 }

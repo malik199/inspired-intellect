@@ -16,7 +16,6 @@ export class BodyComponent implements OnInit {
   constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
-    //this.filteredMovies = this.movieService.fetchMovies()
     this.filteredMovies = this.movieService.getFilteredMovies()
   }
 

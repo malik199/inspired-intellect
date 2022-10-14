@@ -26,7 +26,6 @@ export class HeaderComponent implements OnInit {
   }
 
   setGenre(_genre: string) {
-    //this.movieService.filterMovies(_genre);
     this.movieService.setfilterMovies(_genre);
   }
 

@@ -10,8 +10,10 @@ import { IflixMovies } from '../interfaces/iflix-movies';
 })
 export class MainComponent implements OnInit {
 
-  constructor() {}
+  constructor(public movieService: MovieService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.movieService.fetchMovies();
+  }
   
 }
