@@ -1,7 +1,6 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, toArray, mergeAll, mergeMap, concatAll, tap, distinct} from 'rxjs/operators';
+import { map, toArray, mergeMap, concatAll, tap, distinct} from 'rxjs/operators';
 import { MovieService } from 'src/services/movies.service';
 import { IflixMovies } from '../interfaces/iflix-movies';
 
@@ -10,33 +9,25 @@ import { IflixMovies } from '../interfaces/iflix-movies';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
+
 export class HeaderComponent implements OnInit {
 
-  constructor(private movieService: MovieService) { }
-  movies: Array<any> = [];
-  filteredMovies: Array<any> = [];
+  constructor(public movieService: MovieService) { }
   genres$: Observable<string[]>;
 
   ngOnInit(): void {
-    this.genres$ = this.movieService.getMovies().pipe(
+    this.genres$ = this.movieService.fetchMovies().pipe(
       mergeMap(items => items),
       map(items => items.genres),
       concatAll(),
       distinct(),
       toArray()
     )
-
-    // _genres$.subscribe(x => {
-    //   console.log(x)
-    // })
   }
 
   setGenre(_genre: string) {
-
-    alert(_genre);
-    this.filteredMovies = this.movies.filter((item: any) => {
-      return item.genres.includes(_genre)
-    })
+    //this.movieService.filterMovies(_genre);
+    this.movieService.setfilterMovies(_genre);
   }
 
 }

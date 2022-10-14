@@ -10,12 +10,14 @@ import { Observable } from 'rxjs';
 })
 export class BodyComponent implements OnInit {
   panelOpenState: boolean = false;
-  filteredMovies: Array<any> = [];
+  filteredMovies: Observable<IflixMovies[]>;
+  allMovies$: Observable<IflixMovies[] | null>;
 
-  allMovies$ = this.movieService.getMovies();
-  constructor(private movieService: MovieService) { }
+  constructor(public movieService: MovieService) { }
 
   ngOnInit(): void {
+    //this.filteredMovies = this.movieService.fetchMovies()
+    this.filteredMovies = this.movieService.getFilteredMovies()
   }
 
   handleMissingImage(event: Event) {
